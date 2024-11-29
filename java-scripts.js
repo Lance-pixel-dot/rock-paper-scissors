@@ -4,10 +4,13 @@ let computerScore = 0
 const choice = document.querySelector('#choices');
 const humanSlct = document.querySelector('#humanSlct');
 const computerSlct = document.querySelector('#computerSlct');
-const roundResult = document.querySelector('#round');
+const roundResult = document.querySelector('#result');
 const humanScr = document.querySelector('#humanScr');
 const computerScr = document.querySelector('#computerScr');
 const result = document.querySelector('#winner');
+const currentRnd = document.querySelector('#round');
+const start = document.querySelector('#start');
+const restart = document.querySelector('#restart');
 
 let playerSelection;
 let rounds = 0;
@@ -24,6 +27,10 @@ function playRound(humanChoice, computerChoice){
    humanChoice = playerSelection;
 
    humanSlct.textContent = ` ${playerSelection}`;
+
+   rounds++;
+   currentRnd.textContent = rounds;
+   console.log(rounds);
 
     if(computerChoice === 0){
 
@@ -74,24 +81,29 @@ function playRound(humanChoice, computerChoice){
 
     humanScr.textContent = humanScore;
     computerScr.textContent = computerScore;
+
+    gameResult();
 }
 
 function playGame(){
+
+    rounds++;
+    currentRnd.textContent = rounds;
 
     choice.addEventListener('click', (e) => {
     let target = e.target;
 
     switch(target.className){
 
-       case 'rock':
+       case 'gameButton rock':
            playerSelection = 'rock'
            playRound();
            break;
-       case 'paper':
+       case 'gameButton paper':
            playerSelection = 'paper'
            playRound();
            break;
-       case 'scissor':
+       case 'gameButton scissor':
            playerSelection = 'scissor'
            playRound();
            break;
@@ -102,4 +114,55 @@ function playGame(){
 
 }
 
-console.log(playGame());
+function gameMenu(){
+
+    start.addEventListener('click', () => {
+        playGame();
+        choice.style.display = 'block';
+        start.style.display = 'none';
+    });
+
+    restart.addEventListener('click', () => {
+        choice.style.display = 'block';
+        restart.style.display = 'none';
+
+        humanSlct.textContent = '';
+        computerSlct.textContent = '';
+        humanScr.textContent = null;
+        computerScr.textContent = null;
+        humanScore = 0;
+        computerScore = 0;
+        rounds = 0;
+        currentRnd.textContent = rounds;
+        roundResult.textContent = '';
+        result.textContent = '';
+
+        playGame();
+    })
+    
+}
+
+function gameResult(){
+
+    if(rounds === roundLimit && computerScore > humanScore){
+        result.textContent = 'Computer Wins!';
+        currentRnd.textContent = 'Game Finish!';
+        choice.style.display = 'none';
+        restart.style.display = 'block';
+        gameMenu();
+    }else if(rounds === roundLimit && humanScore > computerScore){
+        result.textContent = 'You Win!';
+        currentRnd.textContent = 'Game Finish!';
+        choice.style.display = 'none';
+        restart.style.display = 'block';
+        gameMenu();
+    }else if(rounds === roundLimit && humanScore === computerScore){
+        result.textContent = 'Tie no Winner!';
+        currentRnd.textContent = 'Game Finish!';
+        choice.style.display = 'none';
+        restart.style.display = 'block';
+        gameMenu();
+    }
+}
+
+gameMenu();

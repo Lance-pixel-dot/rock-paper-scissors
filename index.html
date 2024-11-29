@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Rock, Paper, Scissors!</title>
 </head>
 <body>
     
     <div id="choices">
-        <button class="rock">Rock</button>
-        <button class="paper">Paper</button>
-        <button class="scissor">Scissor</button>
+        <button class="gameButton rock">Rock</button>
+        <button class="gameButton paper">Paper</button>
+        <button class="gameButton scissor">Scissor</button>
     </div>
     <div id="display">
 
@@ -20,8 +21,10 @@
         <div>Computer Select:<span id="computerSlct"></span>
         </div>
 
-        <div>Round result:<span id="round"></span>
+        <div>Round result:<span id="result"></span>
         </div>
+
+        <div>Current Round: <span id="round"></span>
 
         <div>Current Score
         <span id="score"></span>
@@ -35,6 +38,10 @@
 
         <div>Winner Result:<span id="winner"></span></div>
 
+    </div>
+    <div id="menu">
+        <button id="start">Start</button>
+        <button id="restart">Restart</button>
     </div>
 
     <script src="java-scripts.js"></script>
