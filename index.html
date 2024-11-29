@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Rock, Paper, Scissors!</title>
 </head>
 <body>
-    
+    <div id="mainDisplay">
+        <div class="human">Human
+            <img src="images/placeholder.png" alt="" class="placeHolder">
+            <img src="images/paper.png" alt="" class="humanChoice paper">
+            <img src="images/rock.png" alt="" class="humanChoice rock">
+            <img src="images/scissor.png" alt="" class="humanChoice scissor">
+        </div>
+        <span id="vs">VS</span>
+        <div class="computer">Computer
+            <img src="images/placeholder.png" alt="" class="placeHolder">
+            <img src="images/paper.png" alt="" class="humanChoice paper">
+            <img src="images/rock.png" alt="" class="humanChoice rock">
+            <img src="images/scissor.png" alt="" class="humanChoice scissor">
+        </div>
+    </div>
     <div id="choices">
         <button class="gameButton rock">Rock</button>
         <button class="gameButton paper">Paper</button>
@@ -42,6 +59,7 @@
     <div id="menu">
         <button id="start">Start</button>
         <button id="restart">Restart</button>
+        <button id="continue">Continue</button>
     </div>
 
     <script src="java-scripts.js"></script>

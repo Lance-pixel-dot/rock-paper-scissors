@@ -11,10 +11,15 @@ const result = document.querySelector('#winner');
 const currentRnd = document.querySelector('#round');
 const start = document.querySelector('#start');
 const restart = document.querySelector('#restart');
+const continyu = document.querySelector('#continue');
+const placeHolderImage = document.querySelector('.placeHolder');
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissor = document.querySelector('.scissor');
 
 let playerSelection;
-let rounds = 0;
-let roundLimit = 5;
+let rounds = 1;
+let roundLimit = 6;
 
 
 function getComputerChoice(){
@@ -26,21 +31,23 @@ function playRound(humanChoice, computerChoice){
    computerChoice = getComputerChoice()
    humanChoice = playerSelection;
 
-   humanSlct.textContent = ` ${playerSelection}`;
-
-   rounds++;
    currentRnd.textContent = rounds;
-   console.log(rounds);
+
+   humanSlct.textContent = `${playerSelection}`;
 
     if(computerChoice === 0){
 
-        computerChoice = 'rock'
-        computerSlct.textContent = ` ${computerChoice}`;
+        computerChoice = 'rock';
+        computerSlct.textContent = `${computerChoice}`;
+        rock.style.display = 'block';
+        placeHolderImage.style.display = 'none';
 
         if(humanChoice === 'scissor'){
+            scissor.style.display = 'block';
             computerScore++
             roundResult.textContent = `You lose!`;
         }else if(humanChoice === computerChoice){
+            rock.style.display = 'block';
             roundResult.textContent = 'Draw!';
         }else{
             humanScore++
@@ -50,10 +57,13 @@ function playRound(humanChoice, computerChoice){
     }else if(computerChoice === 1){
 
         computerChoice = 'paper'
-        computerSlct.textContent = ` ${computerChoice}`;
+        computerSlct.textContent = `${computerChoice}`;
+        paper.style.display = 'block'
+        placeHolderImage.style.display = 'none';
 
         if(humanChoice === 'rock'){
-            computerScore++
+            rock.style.display = 'block';
+            computerScore++ 
             roundResult.textContent = 'You lose!';
         }else if(humanChoice === computerChoice){
             roundResult.textContent = 'Draw!';
@@ -64,10 +74,13 @@ function playRound(humanChoice, computerChoice){
 
     }else if(computerChoice === 2){
 
+        scissor.style.display = 'block';
+        placeHolderImage.style.display = 'none';
         computerChoice = 'scissor'
-        computerSlct.textContent = ` ${computerChoice}`;
+        computerSlct.textContent = `${computerChoice}`;
 
         if(humanChoice === 'paper'){
+            paper.style.display = 'block';
             computerScore++
             roundResult.textContent = 'You lose!';
         }else if(humanChoice === computerChoice){
@@ -82,13 +95,23 @@ function playRound(humanChoice, computerChoice){
     humanScr.textContent = humanScore;
     computerScr.textContent = computerScore;
 
-    gameResult();
+    continyu.style.display = 'block';
+    choice.style.display = 'none';
+
+    continyu.addEventListener('click', () => {
+        continyu.style.display = 'none';
+        choice.style.display = 'block';
+        humanSlct.textContent = null;
+        computerSlct.textContent = null;
+        roundResult.textContent = null;
+        currentRnd.textContent = rounds;
+        gameResult();
+    });
+    
+    rounds++;
 }
 
 function playGame(){
-
-    rounds++;
-    currentRnd.textContent = rounds;
 
     choice.addEventListener('click', (e) => {
     let target = e.target;
@@ -116,30 +139,32 @@ function playGame(){
 
 function gameMenu(){
 
+    continyu.style.display = 'none';
+
     start.addEventListener('click', () => {
-        playGame();
         choice.style.display = 'block';
         start.style.display = 'none';
+        currentRnd.textContent = rounds;
+        playGame();
     });
 
     restart.addEventListener('click', () => {
+        
         choice.style.display = 'block';
         restart.style.display = 'none';
+    
+        humanScore = 0;
+        computerScore = 0;
+        rounds = 1;
 
         humanSlct.textContent = '';
         computerSlct.textContent = '';
         humanScr.textContent = null;
         computerScr.textContent = null;
-        humanScore = 0;
-        computerScore = 0;
-        rounds = 0;
         currentRnd.textContent = rounds;
         roundResult.textContent = '';
         result.textContent = '';
-
-        playGame();
     })
-    
 }
 
 function gameResult(){
@@ -163,6 +188,8 @@ function gameResult(){
         restart.style.display = 'block';
         gameMenu();
     }
+
 }
 
 gameMenu();
+
