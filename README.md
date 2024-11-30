@@ -1,0 +1,1 @@
+3rd Project still struggling a bit with css, and javascript was difficult for me since this is my first project using javascript, and please forgive the messy code if it's ureadable 😵‍💫. This project was a bit more focused on javascript because of the interactivity over all it was a good experience hopefully I improve more with practice and projects.
